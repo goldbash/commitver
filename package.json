@@ -1,0 +1,40 @@
+{
+  "name": "commitver",
+  "version": "1.0.1",
+  "description": "COMMITVER - Automatic version management for Git commits",
+  "main": "src/prepend_version.cjs",
+  "bin": {
+    "commitver": "./src/prepend_version.cjs"
+  },
+  "scripts": {
+    "install-hooks": "node scripts/install.js",
+    "uninstall-hooks": "rm -f .git/hooks/prepare-commit-msg .git/hooks/pre-commit",
+    "open-ui": "node scripts/show-ui.js",
+    "open-ui-ide": "node scripts/enable-vscode-extension.js",
+    "postinstall": "node scripts/install.js",
+    "quick-start": "node quick-start.js"
+  },
+  "keywords": [
+    "commitver",
+    "git",
+    "commit",
+    "version",
+    "hooks",
+    "automation",
+    "vscode",
+    "extension"
+  ],
+  "author": "COMMITVER",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "src/",
+    "hooks/",
+    "scripts/",
+    "config/",
+    "extension/",
+    "README.md"
+  ]
+}

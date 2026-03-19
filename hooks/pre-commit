@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Increment patch version (no tag, no commit)
+npm version patch --no-git-tag-version
+
+# Add updated version files to the current commit
+git add package.json package-lock.json
