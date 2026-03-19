@@ -1,6 +1,6 @@
 {
   "name": "commitver",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "COMMITVER - Automatic version management for Git commits",
   "main": "src/prepend_version.cjs",
   "bin": {
