@@ -1,122 +1,35 @@
 # COMMITVER
 
-**Complete Git version management system** - Automatically prepend version numbers to commit messages and increment versions on every commit.
+**Simple Git version management** - Automatically add version numbers to your commit messages with one click.
+
+## How It Works
+
+![Demo](assets/commiter.gif)
+
+You can add to version number at the beginning of your commit comment.
+
+If you don't want to write a comment, you can simply press the commit button.
+
+**Version Format: Major.Minor.Patch**
+
+Example: v1.0.2
+- Major: 1 (Breaking changes)
+- Minor: 0 (New features)  
+- Patch: 2 (Bug fixes)
 
 ## Features
 
-- **Automatic version prefixing** - Add version numbers to commit messages
-- **Automatic version incrementing** - Increment patch version on each commit  
-- **Customizable formats** - Choose from multiple commit message formats
-- **VS Code integration** - Beautiful UI for settings management
-- **Configuration file** - JSON-based configuration
-- **Git hooks** - Works with any Git client
-- **Zero dependencies** - Lightweight and fast
+- **Automatic version prefixing** - Version numbers added to commit messages
+- **Automatic version incrementing** - Patch version increments on each commit automatically  
+- **Zero configuration** - Works out of the box
+- **Simple to use** - Just commit normally
+- **VS Code integration** - Quick commit command available
 
 ## Quick Start
 
-### Method 1: Complete Project Setup (Recommended)
+### Method 1: Use Git Commands (Recommended)
 
-Create a new project with everything set up automatically:
-
-```bash
-# Create new project directory
-mkdir my-new-project
-cd my-new-project
-
-# Run quick start (installs everything)
-node ../git-version-commit/quick-start.js my-new-project
-
-# That's it! Your project is ready.
-```
-
-### Method 2: Install to Existing Project
-
-```bash
-# Install to existing Git repository
-npm install ../git-version-commit
-
-# Or install hooks manually
-npm run install-hooks
-```
-
-### Method 3: VS Code Extension
-
-```bash
-# Open settings UI in VS Code
-npm run open-ui-ide
-```
-
-## What Gets Installed
-
-**Git repository** (if not exists)  
-**package.json** with version 1.0.0 (if not exists)  
-**Git hooks** for automatic versioning  
-**Configuration file** with default settings  
-**README.md** with documentation  
-**VS Code UI** for settings management  
-**First commit** with automatic versioning  
-
-## Available Formats
-
-### 1. Version + Comment (Default)
-
-```
-v1.0.1 Add new feature
-```
-
-### 2. Version + Date + Comment
-
-```
-v1.0.1 2026-03-19 Add new feature
-```
-
-### 3. Comment + Version
-
-```
-Add new feature v1.0.1
-```
-
-### 4. Custom Template
-
-```
-${version} ${date} ${message}
-```
-
-## Configuration
-
-Create `.commitver.json` in your project root:
-
-```json
-{
-  "format": "version-comment",
-  "template": "${version} ${message}",
-  "includeDate": false,
-  "dateFormat": "YYYY-MM-DD"
-}
-```
-
-### Format Options
-
-- `version-comment`: Version + Comment
-- `version-date-comment`: Version + Date + Comment  
-- `comment-version`: Comment + Version
-- `custom`: Use custom template
-
-### Date Formats
-
-- `YYYY-MM-DD`: 2026-03-19
-- `MM/DD/YYYY`: 03/19/2026
-- `DD/MM/YYYY`: 19/03/2026
-
-### Template Variables
-
-- `${version}`: Current version (e.g., v1.0.1)
-- `${date}`: Formatted date (if includeDate is true)
-- `${message}`: Your commit message
-
-## Usage
-
-### Basic Usage
+Just commit normally - version is added automatically:
 
 ```bash
 # Make changes
@@ -129,116 +42,68 @@ git commit -m "Add new feature"
 # Result: v1.0.2 Add new feature
 ```
 
-### VS Code Integration
+### Method 2: VS Code Extension
+
+Use the quick commit command:
 
 ```bash
-# Open settings UI
-npm run open-ui-ide
+# Open command palette
+Ctrl+Shift+P → "Quick Commit with Version"
 
-# Or use command palette
-Ctrl+Shift+P → "COMMITVER"
+# Enter your message and commit automatically
 ```
 
-### Configuration Management
+## What Gets Installed
+
+**Git hooks** for automatic versioning  
+**package.json** with version management  
+**VS Code extension** for quick commits  
+**Zero setup required** - works immediately  
+
+## Usage Examples
+
+### Basic Git Usage
 
 ```bash
-# Open UI
-npm run open-ui-ide
+# Empty message - auto generates "Auto commit"
+git commit -m ""
+# Result: v1.0.2 Auto commit
 
-# Manual config edit
-code .commitver.json
+# With your message
+git commit -m "Fix bug"
+# Result: v1.0.3 Fix bug
+
+# Multiple words
+git commit -m "Add new feature and update docs"
+# Result: v1.0.4 Add new feature and update docs
 ```
 
-## Project Structure
-
-```
-commitver/
-├── src/
-│   ├── prepend_version.cjs    # Main versioning logic
-│   └── formatter.js          # Message formatting
-├── hooks/
-│   ├── prepare-commit-msg    # Git hook for message formatting
-│   └── pre-commit           # Git hook for version increment
-├── scripts/
-│   ├── install.js           # Complete installation
-│   ├── quick-start.js        # New project setup
-│   └── show-ui.js           # UI launcher
-├── extension/
-│   └── src/
-│       └── extension.ts      # VS Code extension
-├── config/
-│   └── default.json         # Default configuration
-└── package.json              # Package metadata
-```
-
-## Advanced Usage
-
-### Custom Hooks
-
-You can customize Git hooks:
+### VS Code Extension
 
 ```bash
-# Edit hooks directly
-code .git/hooks/prepare-commit-msg
-code .git/hooks/pre-commit
+# Press Ctrl+Shift+P
+# Search: "Quick Commit with Version"
+# Enter message and press Enter
+# Done!
 ```
 
-### Team Collaboration
+## Current Configuration
 
-Share configuration with your team:
+The system uses these settings by default:
+- Format: `v{version} {message}`
+- Version source: `package.json`
+- Auto-increment: **Patch version** (x.x.x+1) - Perfect for continuous development
 
-```bash
-# Commit configuration file
-git add .commitver.json
-git commit -m "Add version commit configuration"
+### Why Patch Version?
 
-# Team members get same settings
-git pull
-```
+**Patch version auto-increment** is ideal for:
+- **Daily development** - Small changes and bug fixes
+- **Continuous integration** - No manual version management needed
+- **Team collaboration** - Consistent version tracking
+- **Bug fix tracking** - Clear history of small improvements
 
-### CI/CD Integration
-
-Works with any CI/CD system:
-
-```yaml
-# GitHub Actions example
-- name: Commit with version
-  run: |
-    git add .
-    git commit -m "Auto release v${{ steps.version.outputs.version }}"
-```
-
-## Development
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/commitver.git
-cd commitver
-
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Build extension
-npm run compile
-```
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Support
-
-- [Documentation](https://github.com/yourusername/commitver#readme)
-- [Issues](https://github.com/yourusername/commitver/issues)
-- [Discussions](https://github.com/yourusername/commitver/discussions)
+This means you can focus on coding while versions handle themselves automatically.
 
 ---
 
-**Made with ❤️ for developers who love clean version management**
+**Made with ❤️ for simple version management**
