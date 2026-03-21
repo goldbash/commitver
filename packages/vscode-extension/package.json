@@ -2,8 +2,12 @@
   "name": "commitver",
   "displayName": "COMMITVER",
   "description": "Simple commit with automatic versioning",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "publisher": "commitver",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goldbash/commitver.git"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },

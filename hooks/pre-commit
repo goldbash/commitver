@@ -3,5 +3,31 @@
 # Increment patch version (no tag, no commit)
 npm version patch --no-git-tag-version
 
-# Add updated version files to the current commit
-git add package.json package-lock.json
+# Get current version
+CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+# Update all package.json files with the same version
+echo "🔄 Updating all package versions to $CURRENT_VERSION"
+
+# Update VS Code extension
+if [ -f "packages/vscode-extension/package.json" ]; then
+  sed -i.bak "s/\"version\": \".*\"/\"version\": \"$CURRENT_VERSION\"/" packages/vscode-extension/package.json
+  rm -f packages/vscode-extension/package.json.bak
+fi
+
+# Update core package
+if [ -f "packages/core/package.json" ]; then
+  sed -i.bak "s/\"version\": \".*\"/\"version\": \"$CURRENT_VERSION\"/" packages/core/package.json
+  rm -f packages/core/package.json.bak
+fi
+
+# Update CLI package
+if [ -f "packages/cli/package.json" ]; then
+  sed -i.bak "s/\"version\": \".*\"/\"version\": \"$CURRENT_VERSION\"/" packages/cli/package.json
+  rm -f packages/cli/package.json.bak
+fi
+
+# Add all updated package.json files to the current commit
+git add package.json package-lock.json packages/*/package.json packages/*/package-lock.json
+
+echo "✅ All package versions updated to $CURRENT_VERSION"
