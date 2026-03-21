@@ -1,0 +1,26 @@
+{
+  "name": "commitver-monorepo",
+  "version": "1.0.0",
+  "description": "COMMITVER Monorepo - Automatic version management for Git commits",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "build:core": "npm run build --workspace=@commitver/core",
+    "build:cli": "npm run build --workspace=@commitver/cli",
+    "build:vscode": "npm run build --workspace=commitver"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

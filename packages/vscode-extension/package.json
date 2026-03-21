@@ -1,0 +1,49 @@
+{
+  "name": "commitver",
+  "displayName": "COMMITVER",
+  "description": "Simple commit with automatic versioning",
+  "version": "1.0.0",
+  "publisher": "commitver",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:commitver.quickCommit"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitver.quickCommit",
+        "title": "Quick Commit with Version",
+        "category": "COMMITVER"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "commitver.quickCommit"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build": "tsc -p ./",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@commitver/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "20.x",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.19.0"
+  }
+}

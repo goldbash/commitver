@@ -1,0 +1,148 @@
+name: Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release-core:
+    name: Release Core Package
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build core package
+      run: npm run build:core
+    
+    - name: Publish to npm
+      run: npm publish --workspace=@commitver/core --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release-cli:
+    name: Release CLI Package
+    runs-on: ubuntu-latest
+    needs: release-core
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build CLI package
+      run: npm run build:cli
+    
+    - name: Publish to npm
+      run: npm publish --workspace=@commitver/cli --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release-vscode:
+    name: Release VS Code Extension
+    runs-on: ubuntu-latest
+    needs: release-core
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build VS Code extension
+      run: npm run build:vscode
+    
+    - name: Package VS Code extension
+      run: npm run package --workspace=commitver
+      working-directory: packages/vscode-extension
+    
+    - name: Publish to VS Code Marketplace
+      run: npx vsce publish --pat ${{ secrets.VSCE_TOKEN }}
+      working-directory: packages/vscode-extension
+    
+    - name: Upload VSIX as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: vscode-extension
+        path: packages/vscode-extension/*.vsix
+
+  create-github-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [release-core, release-cli, release-vscode]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Download VSIX artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: vscode-extension
+        path: packages/vscode-extension/
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+        body: |
+          ## Changes in ${{ github.ref_name }}
+          
+          ### Core Package
+          - Updated core functionality
+          
+          ### CLI Package  
+          - Enhanced command-line interface
+          
+          ### VS Code Extension
+          - Improved extension features
+          
+          ## Installation
+          
+          ### npm
+          ```bash
+          npm install @commitver/core
+          npm install @commitver/cli
+          ```
+          
+          ### VS Code
+          Install from the VS Code Marketplace or download the VSIX file below.
+    
+    - name: Upload VSIX to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: packages/vscode-extension/commitver-*.vsix
