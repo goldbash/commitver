@@ -1,6 +1,6 @@
 {
   "name": "commitver-monorepo",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "COMMITVER Monorepo - Automatic version management for Git commits",
   "private": true,
   "repository": {

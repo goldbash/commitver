@@ -2,7 +2,7 @@
   "name": "commitver",
   "displayName": "COMMITVER",
   "description": "Simple commit with automatic versioning",
-  "version": "1.0.6",
+  "version": "1.0.20",
   "publisher": "commitver",
   "repository": {
     "type": "git",
@@ -13,9 +13,6 @@
   },
   "categories": [
     "Other"
-  ],
-  "activationEvents": [
-    "onCommand:commitver.quickCommit"
   ],
   "main": "./out/extension.js",
   "contributes": {

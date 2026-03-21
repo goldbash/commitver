@@ -1,6 +1,6 @@
 {
   "name": "@commitver/core",
-  "version": "1.0.6",
+  "version": "1.0.20",
   "description": "Core library for COMMITVER - shared logic across CLI and VS Code extension",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
