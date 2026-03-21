@@ -1,0 +1,6 @@
+{
+  "format": "version-comment",
+  "template": "${version} ${message}",
+  "dateFormat": "YYYY-MM-DD",
+  "includeDate": false
+}

@@ -2,8 +2,6 @@
 
 **Simple Git version management** - Automatically add version numbers to your commit messages with one click.
 
-[![npm version](https://badge.fury.io/js/%40commitver%2Fcli.svg)](https://badge.fury.io/js/%40commitver%2Fcli)
-[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-blue.svg)](https://marketplace.visualstudio.com/items?itemName=commitver.commitver)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 What is COMMITVER?
@@ -41,18 +39,11 @@ npm install -g @commitver/cli
 ### [commitver (VS Code Extension)](./packages/vscode-extension/)
 VS Code extension for seamless IDE integration.
 
-[Install from VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=commitver.commitver)
+- Status: Coming soon to VS Code Marketplace
 
 ## 🎯 Quick Start
 
-### Method 1: VS Code Extension (Recommended)
-
-1. Install the [COMMITVER extension](https://marketplace.visualstudio.com/items?itemName=commitver.commitver)
-2. Open command palette: `Ctrl+Shift+P`
-3. Type: "Quick Commit with Version"
-4. Enter your message and commit automatically
-
-### Method 2: CLI Tool
+### Method 1: CLI Tool (Recommended)
 
 ```bash
 # Install globally
@@ -67,7 +58,7 @@ git commit -m "Add new feature"
 # Result: v1.0.1 Add new feature
 ```
 
-### Method 3: Core Library
+### Method 2: Core Library
 
 ```typescript
 import { CommitverCore } from '@commitver/core';

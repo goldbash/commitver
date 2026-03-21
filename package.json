@@ -1,8 +1,12 @@
 {
   "name": "commitver-monorepo",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "COMMITVER Monorepo - Automatic version management for Git commits",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goldbash/commitver.git"
+  },
   "workspaces": [
     "packages/*"
   ],

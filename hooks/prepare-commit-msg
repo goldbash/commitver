@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Pass the commit message file as an argument to the node script
+node src/prepend_version.cjs "$1"
