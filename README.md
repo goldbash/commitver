@@ -1,9 +1,9 @@
-# COMMITVER
+# COMMITVER github commit version extension
 
 Automatically appended with each commit.
 Simple commit with automatic versioning for Visual Studio Code.
 
-![Image](Include the version in the commit comment..gif)
+![alt text](<assets/Include the version in the commit comment..gif>)
 
 ## Features
 
@@ -78,4 +78,4 @@ If you encounter any issues or have suggestions, please file an issue on our Git
 
 ## License
 
-ISC
+MIT

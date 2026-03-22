@@ -6,7 +6,7 @@
   "publisher": "commitver",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alphabetaset/commitver.git"
+    "url": "git+https://github.com/goldbash/commitver.git"
   },
   "engines": {
     "vscode": "^1.75.0"
@@ -53,10 +53,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/alphabetaset/commitver/issues"
+    "url": "https://github.com/goldbash/commitver/issues"
   },
-  "homepage": "https://github.com/alphabetaset/commitver#readme"
+  "homepage": "https://github.com/goldbash/commitver#readme"
 }
